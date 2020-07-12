@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Gabung Zoom lewat Browser!</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Masuk ke meeting Zoom lewat browsermu!</h1>
+                <label for="zoom-link-input">Link meeting Zoom:</label>
+                <form action="#" class="input-group mb-3" id="zoom-link-form">
+                    <input type="text" id="zoom-link-input" class="form-control" placeholder="Ketik link meeting zoom di sini...">
+                    <div class="input-group-append">
+                      <button class="btn btn-success" type="submit" id="submit-link">Masuk Meeting</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script>
+        $(document).ready(function() {
+            $('#zoom-link-input').val('');
+            if((link = window.location.href.search('\\?')) > -1){
+                if(link.search("zoom.us") > -1){
+                    $('#zoom-link-input').val(window.location.href.substring(link+1));
+                    $('#submit-link').click();
+                }
+            }
+        });
+        $('#zoom-link-form').submit(function(event) {
+            event.preventDefault();
+            input = $('#zoom-link-input').val();
+            if((domain = input.search("zoom.us")) > -1){
+                if((join = input.search("/j/")) > -1){
+                    if((join - domain) == 7){
+                        if((id_html = input.search("#")) > -1){
+                            // ilangin pagernya
+                            window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3, id_html))
+                        }else {
+                            // langsung kasih id
+                            window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3));
+                        }
+                    }else {
+                        // modal wrong
+                        alert('Not meeting ID link');
+                    }
+                }else {
+                    // modal wrong
+                    alert('Not meeting ID link');
+                }
+            }else {
+                // modal wrong
+                alert('Not "*zoom.us" link');
+            }
+        });
+    </script>
+</body>
+</html>
