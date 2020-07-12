@@ -68,10 +68,18 @@
                     if((join - domain) == 7){
                         if((id_html = input.search("#")) > -1){
                             // ilangin pagernya
-                            window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3, id_html))
+                            if(input.substr(0,8) == "https://" || input.substr(0,7) == "http://"){
+                                window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3, id_html));
+                            }else {
+                                window.location.replace("https://" + input.substring(0,join) + "/wc/join/" + input.substring(join+3, id_html))
+                            }
                         }else {
                             // langsung kasih id
-                            window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3));
+                            if(input.substr(0,8) == "https://" || input.substr(0,7) == "http://"){
+                                window.location.replace(input.substring(0,join) + "/wc/join/" + input.substring(join+3));
+                            }else {
+                                window.location.replace("https://" + input.substring(0,join) + "/wc/join/" + input.substring(join+3));
+                            }
                         }
                     }else {
                         // modal wrong
