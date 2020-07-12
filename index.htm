@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    :root {
+        background: #5dbcd2;
+    }
+    body {
+        background: #5dbcd2;
+    }
+    .container {
+        margin-top: 30vh;
+        background: #5dbcd2;
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        display: none;
+        width: 100%;
+        text-align: center;
+        margin-top: 3rem;
+    }
+    form {
+        margin-top: 3rem;
+    }
+    </style>
     <title>Gabung Zoom lewat Browser!</title>
 </head>
 <body>
@@ -30,7 +54,7 @@
         $(document).ready(function() {
             $('#zoom-link-input').val('');
             if((link = window.location.href.search('\\?')) > -1){
-                if(link.search("zoom.us") > -1){
+                if(window.location.href.substring(window.location.href.search('\\?')+1).search("zoom.us") > -1){
                     $('#zoom-link-input').val(window.location.href.substring(link+1));
                     $('#submit-link').click();
                 }
@@ -51,15 +75,15 @@
                         }
                     }else {
                         // modal wrong
-                        alert('Not meeting ID link');
+                        alert('Bukan link meeting zoom');
                     }
                 }else {
                     // modal wrong
-                    alert('Not meeting ID link');
+                    alert('Bukan link meeting zoom');
                 }
             }else {
                 // modal wrong
-                alert('Not "*zoom.us" link');
+                alert('Bukan link *zoom.us*');
             }
         });
     </script>
